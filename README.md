@@ -35,7 +35,7 @@ spec:
   project: default
   source:
     repoURL: git@github.com:your-org/hoarder-helm-chart.git
-    targetRevision: v0.1.2
+    targetRevision: v0.1.3
     path: .
     helm:
       valueFiles:
