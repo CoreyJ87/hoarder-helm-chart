@@ -1,6 +1,6 @@
 # Hoarder Helm Chart
 
-This Helm chart deploys the Hoarder application on a Kubernetes cluster, with support for ArgoCD and Traefik ingress.
+This Helm chart deploys [Hoarder](https://github.com/hoarder-app/hoarder) - a self-hostable bookmark-everything app with AI-based automatic tagging and full text search - on a Kubernetes cluster, with support for ArgoCD and Traefik ingress.
 
 ## Prerequisites
 
@@ -131,4 +131,43 @@ You can generate secure random strings using:
 
 ```bash
 openssl rand -base64 36
-``` 
+```
+
+## Authors
+
+### Original Hoarder Application
+
+The Hoarder application was created by Mohamed Bassem ([@mbassem](https://github.com/mbassem)).
+
+### Helm Chart
+
+- [@CoreyJ87](https://github.com/CoreyJ87) - Corey Jones
+
+## Contributing
+
+Contributions to the Hoarder Helm chart are welcome! Here's how you can contribute:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-new-feature`
+3. Make your changes
+4. Commit your changes: `git commit -am 'Add some feature'`
+5. Push to the branch: `git push origin feature/my-new-feature`
+6. Submit a pull request
+
+### Guidelines for Contributions
+
+- Follow the Helm best practices
+- Update documentation accordingly
+- Add tests when possible
+- Keep the chart as maintainable as possible
+
+## License
+
+This Helm chart is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- [Hoarder](https://github.com/hoarder-app/hoarder) - The base application this chart deploys
+- [Helm](https://helm.sh/) - The package manager for Kubernetes
+- [Traefik](https://traefik.io/) - The cloud native application proxy
+- [ArgoCD](https://argoproj.github.io/argo-cd/) - The GitOps continuous delivery tool for Kubernetes 
