@@ -1,0 +1,16 @@
+{{- if .Values.persistence.meilisearch.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meilisearch-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.meilisearch.accessMode }}
+  {{- if .Values.persistence.meilisearch.storageClass }}
+  storageClassName: {{ .Values.persistence.meilisearch.storageClass }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.meilisearch.size }}
+{{- end }} 

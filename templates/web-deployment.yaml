@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: hoarder-web
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount.web }}
+  selector:
+    matchLabels:
+      app: hoarder-web
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: hoarder-web
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: web
+          image: "{{ .Values.image.web.repository }}:{{ .Values.image.web.tag }}"
+          imagePullPolicy: {{ .Values.image.web.pullPolicy }}
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: MEILI_ADDR
+              value: http://meilisearch:{{ .Values.service.meilisearch.port }}
+            - name: BROWSER_WEB_URL
+              value: http://chrome:{{ .Values.service.chrome.port }}
+            - name: DATA_DIR
+              value: /data
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          envFrom:
+            - secretRef:
+                name: hoarder-secrets
+            - configMapRef:
+                name: hoarder-configuration
+      volumes:
+        - name: data
+          {{- if .Values.persistence.data.enabled }}
+          persistentVolumeClaim:
+            claimName: data-pvc
+          {{- else }}
+          emptyDir: {}
+          {{- end }} 

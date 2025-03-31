@@ -1,0 +1,62 @@
+# Default values for hoarder Helm chart
+
+replicaCount:
+  web: 1
+  chrome: 1
+  meilisearch: 1
+
+image:
+  web:
+    repository: ghcr.io/hoarder-app/hoarder
+    tag: latest
+    pullPolicy: Always
+  chrome:
+    repository: gcr.io/zenika-hub/alpine-chrome
+    tag: "123"
+    pullPolicy: IfNotPresent
+  meilisearch:
+    repository: getmeili/meilisearch
+    tag: v1.11.1
+    pullPolicy: IfNotPresent
+
+service:
+  web:
+    type: ClusterIP
+    port: 3000
+  chrome:
+    type: ClusterIP
+    port: 9222
+  meilisearch:
+    type: ClusterIP
+    port: 7700
+
+persistence:
+  data:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessMode: ReadWriteOnce
+  meilisearch:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    accessMode: ReadWriteOnce
+
+ingress:
+  enabled: false
+  className: ""
+  host: hoarder.synik4l.net
+  annotations: {}
+  tls: []
+
+env:
+  NEXTAUTH_URL: http://localhost:3000
+  HOARDER_VERSION: release
+
+# Secret values (to be overridden in a separate values file or via --set)
+secrets:
+  NEXTAUTH_SECRET: ""
+  MEILI_MASTER_KEY: ""
+  NEXT_PUBLIC_SECRET: ""
+  # Uncomment if needed
+  # OPENAI_API_KEY: ""

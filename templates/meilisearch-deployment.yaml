@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meilisearch
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: meilisearch
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount.meilisearch }}
+  selector:
+    matchLabels:
+      app: meilisearch
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: meilisearch
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: meilisearch
+          image: "{{ .Values.image.meilisearch.repository }}:{{ .Values.image.meilisearch.tag }}"
+          imagePullPolicy: {{ .Values.image.meilisearch.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.meilisearch.port }}
+              name: http
+          env:
+            - name: MEILI_NO_ANALYTICS
+              value: "true"
+          volumeMounts:
+            - mountPath: /meili_data
+              name: meilisearch
+          envFrom:
+            - secretRef:
+                name: hoarder-secrets
+            - configMapRef:
+                name: hoarder-configuration
+      volumes:
+        - name: meilisearch
+          {{- if .Values.persistence.meilisearch.enabled }}
+          persistentVolumeClaim:
+            claimName: meilisearch-pvc
+          {{- else }}
+          emptyDir: {}
+          {{- end }} 

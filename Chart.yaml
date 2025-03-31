@@ -1,0 +1,10 @@
+apiVersion: v2
+name: hoarder
+description: A Helm chart for Hoarder application
+type: application
+version: 0.1.0
+appVersion: "latest"
+maintainers:
+  - name: Corey
+keywords:
+  - hoarder
