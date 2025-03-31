@@ -168,6 +168,8 @@ This Helm chart is licensed under the MIT License - see the [LICENSE](LICENSE) f
 ## Acknowledgements
 
 - [Hoarder](https://github.com/hoarder-app/hoarder) - The base application this chart deploys
+- [Meilisearch](https://www.meilisearch.com/) - The search engine used by Hoarder for full-text search
+- [Chrome](https://github.com/Zenika/alpine-chrome) - The headless browser used for crawling and processing bookmarked content
 - [Helm](https://helm.sh/) - The package manager for Kubernetes
 - [Traefik](https://traefik.io/) - The cloud native application proxy
 - [ArgoCD](https://argoproj.github.io/argo-cd/) - The GitOps continuous delivery tool for Kubernetes 
