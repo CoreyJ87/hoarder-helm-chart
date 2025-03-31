@@ -108,7 +108,7 @@ The following table lists the configurable parameters of the Hoarder chart and t
 | `persistence.meilisearch.accessMode` | Access mode for Meilisearch PVC | `ReadWriteOnce` |
 | `ingress.enabled` | Enable built-in ingress | `false` |
 | `ingress.className` | Ingress class name | `""` |
-| `ingress.host` | Ingress host | `hoarder.synik4l.net` |
+| `ingress.host` | Ingress host | `hoarder.yourdomain.net` |
 | `ingress.annotations` | Ingress annotations | `{}` |
 | `ingress.tls` | Ingress TLS configuration | `[]` |
 | `env.NEXTAUTH_URL` | NextAuth URL | `http://localhost:3000` |
